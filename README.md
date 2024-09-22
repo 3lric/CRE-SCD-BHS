@@ -21,7 +21,7 @@ The **CRE SCD Editor Suite** is a powerful tool designed to help modders edit SC
 
 ### Running the Executable
 
-1. Download the latest release from the [releases page](https://github.com/your-repository/releases).
+1. Download the latest release from the [releases page](https://github.com/3lric/CRE-SCD-BHS/releases/tag/v0.6b).
 2. Extract the `.7z` file to your preferred directory.
 3. Run the `CRE SCD Build Helper Suite v0.6b.exe` file.
 
