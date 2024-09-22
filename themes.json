@@ -1,0 +1,502 @@
+{
+    "BaseTheme": {
+        "QTableWidget": {
+            "gridline-color": "#cccccc",
+            "font-family": "'Consolas', monospace",
+            "font-size": "7pt"
+        },
+        "QPushButton": {
+            "font-family": "'Consolas', monospace"
+        },
+        "QLabel": {
+            "font-family": "'Consolas', monospace"
+        },
+        "QMessageBox": {
+            "font-family": "'Consolas', monospace"
+        },
+        "QDialog": {
+            "font-family": "'Consolas', monospace"
+        }
+    },
+    "Blue": {
+        "QMainWindow": {
+            "background-color": "#87ceeb"
+        },
+        "QTableWidget": {
+            "background-color": "#add8e6",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#4682b4",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#1e90ff"
+        },
+        "QMessageBox": {
+            "background-color": "#add8e6",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#add8e6",
+            "color": "#000000"
+        }
+    },
+    "Cyberpunk": {
+        "QMainWindow": {
+            "background-color": "#0f0f2b"
+        },
+        "QTableWidget": {
+            "background-color": "#1a1a4d",
+            "color": "#ff00ff"
+        },
+        "QPushButton": {
+            "background-color": "#290029",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#ff00ff"
+        },
+        "QMessageBox": {
+            "background-color": "#1a1a4d",
+            "color": "#ff00ff"
+        },
+        "QDialog": {
+            "background-color": "#1a1a4d",
+            "color": "#ff00ff"
+        }
+    },
+    "Dark": {
+        "QMainWindow": {
+            "background-color": "#2b2b2b"
+        },
+        "QTableWidget": {
+            "background-color": "#3c3c3c",
+            "color": "#f5f5f5",
+            "gridline-color": "#6c6c6c"
+        },
+        "QPushButton": {
+            "background-color": "#4b4b4b",
+            "color": "#f5f5f5"
+        },
+        "QLabel": {
+            "color": "#f5f5f5"
+        },
+        "QMessageBox": {
+            "background-color": "#3c3c3c",
+            "color": "#f5f5f5"
+        },
+        "QDialog": {
+            "background-color": "#3c3c3c",
+            "color": "#f5f5f5"
+        }
+    },
+    "Desert Sunset": {
+        "QMainWindow": {
+            "background-color": "#ffcc99"
+        },
+        "QTableWidget": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#ff6600",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#ff4500"
+        },
+        "QMessageBox": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        }
+    },
+    "Forest": {
+        "QMainWindow": {
+            "background-color": "#3b5323"
+        },
+        "QTableWidget": {
+            "background-color": "#556b2f",
+            "color": "#ffffff"
+        },
+        "QPushButton": {
+            "background-color": "#6b8e23",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#ffffff"
+        },
+        "QMessageBox": {
+            "background-color": "#556b2f",
+            "color": "#ffffff"
+        },
+        "QDialog": {
+            "background-color": "#556b2f",
+            "color": "#ffffff"
+        }
+    },
+    "Forest Meadow": {
+        "QMainWindow": {
+            "background-color": "#2e4600"
+        },
+        "QTableWidget": {
+            "background-color": "#486b00",
+            "color": "#ffffff"
+        },
+        "QPushButton": {
+            "background-color": "#4a7420",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#ffff99"
+        },
+        "QMessageBox": {
+            "background-color": "#486b00",
+            "color": "#ffffff"
+        },
+        "QDialog": {
+            "background-color": "#486b00",
+            "color": "#ffffff"
+        }
+    },
+    "Light": {
+        "QMainWindow": {
+            "background-color": "#f5f5f5"
+        },
+        "QTableWidget": {
+            "background-color": "#ffffff",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#dcdcdc",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#000000"
+        },
+        "QMessageBox": {
+            "background-color": "#ffffff",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#ffffff",
+            "color": "#000000"
+        }
+    },
+    "Midnight": {
+        "QMainWindow": {
+            "background-color": "#0f0f2b"
+        },
+        "QTableWidget": {
+            "background-color": "#1a1a4d",
+            "color": "#ffffff"
+        },
+        "QPushButton": {
+            "background-color": "#333366",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#ffffff"
+        },
+        "QMessageBox": {
+            "background-color": "#1a1a4d",
+            "color": "#ffffff"
+        },
+        "QDialog": {
+            "background-color": "#1a1a4d",
+            "color": "#ffffff"
+        }
+    },
+    "Neon Lights": {
+        "QMainWindow": {
+            "background-color": "#000000"
+        },
+        "QTableWidget": {
+            "background-color": "#111111",
+            "color": "#00ff00"
+        },
+        "QPushButton": {
+            "background-color": "#333333",
+            "color": "#00ff00"
+        },
+        "QLabel": {
+            "color": "#00ff00"
+        },
+        "QMessageBox": {
+            "background-color": "#111111",
+            "color": "#00ff00"
+        },
+        "QDialog": {
+            "background-color": "#111111",
+            "color": "#00ff00"
+        }
+    },
+    "Ocean Breeze": {
+        "QMainWindow": {
+            "background-color": "#a3d4f4"
+        },
+        "QTableWidget": {
+            "background-color": "#bdeff5",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#82c6e2",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#005f6b"
+        },
+        "QMessageBox": {
+            "background-color": "#bdeff5",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#bdeff5",
+            "color": "#000000"
+        }
+    },
+    "Orange": {
+        "QMainWindow": {
+            "background-color": "#ffcc66"
+        },
+        "QTableWidget": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#ff8000",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#ff6600"
+        },
+        "QMessageBox": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        }
+    },
+    "Purple": {
+        "QMainWindow": {
+            "background-color": "#9370db"
+        },
+        "QTableWidget": {
+            "background-color": "#dda0dd",
+            "color": "#ffffff"
+        },
+        "QPushButton": {
+            "background-color": "#8a2be2",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#ee82ee"
+        },
+        "QMessageBox": {
+            "background-color": "#dda0dd",
+            "color": "#ffffff"
+        },
+        "QDialog": {
+            "background-color": "#dda0dd",
+            "color": "#ffffff"
+        }
+    },
+    "Resident Evil - Laboratory": {
+        "QMainWindow": {
+            "background-color": "#d1e0d1"
+        },
+        "QTableWidget": {
+            "background-color": "#e6f2e6",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#b3e6b3",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#006600"
+        },
+        "QMessageBox": {
+            "background-color": "#e6f2e6",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#e6f2e6",
+            "color": "#000000"
+        }
+    },
+    "Resident Evil - Mansion": {
+        "QMainWindow": {
+            "background-color": "#4a4a4a"
+        },
+        "QTableWidget": {
+            "background-color": "#603c2a",
+            "color": "#f0e4d7"
+        },
+        "QPushButton": {
+            "background-color": "#804a3c",
+            "color": "#f0e4d7"
+        },
+        "QLabel": {
+            "color": "#f0e4d7"
+        },
+        "QMessageBox": {
+            "background-color": "#603c2a",
+            "color": "#f0e4d7"
+        },
+        "QDialog": {
+            "background-color": "#603c2a",
+            "color": "#f0e4d7"
+        }
+    },
+    "Resident Evil - Raccoon City": {
+        "QMainWindow": {
+            "background-color": "#001f33"
+        },
+        "QTableWidget": {
+            "background-color": "#004080",
+            "color": "#ffffff"
+        },
+        "QPushButton": {
+            "background-color": "#0059b3",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#80bfff"
+        },
+        "QMessageBox": {
+            "background-color": "#004080",
+            "color": "#ffffff"
+        },
+        "QDialog": {
+            "background-color": "#004080",
+            "color": "#ffffff"
+        }
+    },
+    "Resident Evil - Umbrella": {
+        "QMainWindow": {
+            "background-color": "#2b2b2b"
+        },
+        "QTableWidget": {
+            "background-color": "#3a3a3a",
+            "color": "#ff4d4d"
+        },
+        "QPushButton": {
+            "background-color": "#990000",
+            "color": "#ffffff"
+        },
+        "QLabel": {
+            "color": "#ff4d4d"
+        },
+        "QMessageBox": {
+            "background-color": "#3a3a3a",
+            "color": "#ff4d4d"
+        },
+        "QDialog": {
+            "background-color": "#3a3a3a",
+            "color": "#ff4d4d"
+        }
+    },
+    "Rose": {
+        "QMainWindow": {
+            "background-color": "#ffc0cb"
+        },
+        "QTableWidget": {
+            "background-color": "#ffb6c1",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#ff69b4",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#ff1493"
+        },
+        "QMessageBox": {
+            "background-color": "#ffb6c1",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#ffb6c1",
+            "color": "#000000"
+        }
+    },
+    "Silent Hill": {
+        "QMainWindow": {
+            "background-color": "#2e2e2e"
+        },
+        "QTableWidget": {
+            "background-color": "#3a3a3a",
+            "color": "#d7d7d7"
+        },
+        "QPushButton": {
+            "background-color": "#5e5e5e",
+            "color": "#f5f5f5"
+        },
+        "QLabel": {
+            "color": "#d7d7d7"
+        },
+        "QMessageBox": {
+            "background-color": "#3a3a3a",
+            "color": "#d7d7d7"
+        },
+        "QDialog": {
+            "background-color": "#3a3a3a",
+            "color": "#d7d7d7"
+        }
+    },
+    "Sunset": {
+        "QMainWindow": {
+            "background-color": "#ffcc99"
+        },
+        "QTableWidget": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#ff6600",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#ff4500"
+        },
+        "QMessageBox": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#ff9966",
+            "color": "#000000"
+        }
+    },
+    "White": {
+        "QMainWindow": {
+            "background-color": "#ffffff"
+        },
+        "QTableWidget": {
+            "background-color": "#ffffff",
+            "color": "#000000"
+        },
+        "QPushButton": {
+            "background-color": "#f0f0f0",
+            "color": "#000000"
+        },
+        "QLabel": {
+            "color": "#000000"
+        },
+        "QMessageBox": {
+            "background-color": "#ffffff",
+            "color": "#000000"
+        },
+        "QDialog": {
+            "background-color": "#ffffff",
+            "color": "#000000"
+        }
+    }
+}
