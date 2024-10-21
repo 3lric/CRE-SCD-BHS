@@ -4,6 +4,7 @@ import json
 import csv
 import webbrowser
 import logging
+import shutil  # Added for file operations
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QFileDialog,
     QHeaderView, QComboBox, QPushButton, QLabel, QStyle, QAction, QToolTip, QStyledItemDelegate, QLineEdit, QMenu,
@@ -12,7 +13,6 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QEvent, QSettings, QModelIndex
 from PyQt5.QtGui import QFont, QIcon, QBrush, QColor, QClipboard, QPainter, QFontMetrics, QStandardItemModel, QStandardItem, QKeySequence, QPalette, QFontDatabase
 
-# Assuming these modules exist and are correctly implemented
 from theme_manager import load_themes, dict_to_stylesheet
 from menu_helpers import create_menu
 from opcode_editor import open_opcode_editor
@@ -21,15 +21,44 @@ from table_helpers import move_row_up, move_row_down
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
+def get_app_path(subdirectory=""):
+    """Get the application path, accounting for PyInstaller's temporary directory."""
+    if getattr(sys, 'frozen', False):
+        # Running as a bundled executable
+        base_path = os.path.dirname(sys.executable)
+    else:
+        # Running in a normal Python environment
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    if subdirectory:
+        return os.path.join(base_path, subdirectory)
+    return base_path
+
+def ensure_writable_json_files():
+    """Ensure that JSON files are copied to a writable directory if running as a bundled executable."""
+    json_dir = get_app_path("json")
+    if not os.path.exists(json_dir):
+        os.makedirs(json_dir)
+    # List of JSON files
+    json_files = ["re1_opcodes.json", "re15_opcodes.json", "re2_opcodes.json", "re3_opcodes.json", "themes.json"]
+    for file_name in json_files:
+        dest_file = os.path.join(json_dir, file_name)
+        if not os.path.exists(dest_file):
+            if getattr(sys, 'frozen', False):
+                # Copy from the bundled resources
+                source_file = os.path.join(sys._MEIPASS, 'json', file_name)
+            else:
+                # Copy from the script directory
+                source_file = os.path.join(get_app_path("json"), file_name)
+            shutil.copyfile(source_file, dest_file)
+
+def resource_path(relative_path):
+    """Get the absolute path to a resource, works for dev and for PyInstaller."""
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 class HexDataDelegate(QStyledItemDelegate):
     """Custom delegate to handle painting and editing of Hex Data cells."""
-	
-    def resource_path(relative_path):
-        """ Get absolute path to resource, works for development and PyInstaller """
-        base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-        return os.path.join(base_path, relative_path)
-		
+
     def __init__(self, parent=None, original_hex_values=None, opcode_keys=None):
         super().__init__(parent)
         self.original_hex_values = original_hex_values
@@ -136,7 +165,6 @@ class HexDataDelegate(QStyledItemDelegate):
         self.parent_widget.apply_palette_to_widget(msg_box)
         msg_box.exec_()
 
-
 class DraggableTableWidget(QTableWidget):
     """Custom QTableWidget that supports row dragging and custom key events."""
     def __init__(self, *args, **kwargs):
@@ -184,27 +212,28 @@ class DraggableTableWidget(QTableWidget):
         else:
             super().keyPressEvent(event)
 
-
 class NonEditableDelegate(QStyledItemDelegate):
     """Delegate to prevent editing of specific table columns."""
     def createEditor(self, parent, option, index):
         # Prevent editing by returning None
         return None
 
-
 class SCDOpcodeHelper(QMainWindow):
     """Main window class for the SCD Opcode Helper application."""
     def __init__(self):
         """Initialize the main window and set up the UI."""
         super().__init__()
-        self.setWindowTitle("CRE SCD BHS v0.6b")
-        self.setWindowIcon(QIcon("Blue.ico"))
+        self.setWindowTitle("CRE SCD BHS v0.7b")
+        icon_path = resource_path("Blue.ico")
+        self.setWindowIcon(QIcon(icon_path))
         self.setGeometry(100, 100, 1475, 600)
-		
+
         # Load themes and settings
         self.themes = load_themes()
         self.settings = QSettings('MyCompany', 'SCDOpcodeHelper')
         self.current_theme_name = self.settings.value('theme', 'Dark')
+        if self.current_theme_name not in self.themes:
+            self.current_theme_name = 'Dark'  # Fallback to 'Dark' theme if not found
         self.setStyleSheet(dict_to_stylesheet(self.themes[self.current_theme_name]))
         logging.info(f"Initialized with theme: {self.current_theme_name}")
 
@@ -312,7 +341,7 @@ class SCDOpcodeHelper(QMainWindow):
         title_label3.setFont(font)
         title_label3.setStyleSheet("color: grey;")
 
-        version_label = QLabel("v0.6b")
+        version_label = QLabel("v0.7b")
         version_label.setFont(font)
         version_label.setStyleSheet("color: #FF6F61;")
 
@@ -561,13 +590,13 @@ class SCDOpcodeHelper(QMainWindow):
             "Resident Evil 2": "re2_opcodes.json",
             "Resident Evil 3": "re3_opcodes.json"
         }
-        file_path = game_file_map.get(game)
-        if file_path:
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            full_path = os.path.join(script_dir, file_path)
+        file_name = game_file_map.get(game)
+        if file_name:
+            json_dir = get_app_path("json")
+            full_path = os.path.join(json_dir, file_name)
             logging.info(f"Full opcode file path: {full_path}")
             try:
-                with open(full_path, 'r') as json_file:
+                with open(full_path, 'r', encoding='utf-8') as json_file:
                     opcodes = json.load(json_file)
                     # Parse using parse_opcodes_as_dict for all games
                     parsed_opcodes = self.parse_opcodes_as_dict(opcodes, game)
@@ -1040,7 +1069,9 @@ class SCDOpcodeHelper(QMainWindow):
             # Save the new theme
             self.themes[new_theme_name] = new_theme_style
             # Save themes to themes.json
-            with open('themes.json', 'w') as file:
+            json_dir = get_app_path("json")
+            themes_path = os.path.join(json_dir, 'themes.json')
+            with open(themes_path, 'w') as file:
                 json.dump(self.themes, file, indent=4)
             # Reload themes from themes.json
             self.themes = load_themes()
@@ -1143,7 +1174,7 @@ class SCDOpcodeHelper(QMainWindow):
         </head>
         <body>
         <h2>About</h2>
-        <p><b>CRE SCD Editor Suite v0.6b</b></p>
+        <p><b>CRE SCD Editor Suite v0.7b</b></p>
         <p>This application assists in editing SCD files for classic Resident Evil games.
         It allows you to load, edit, and save SCD files, edit opcodes, and customize the application theme.</p>
         <p><b>Developer:</b> 3lric</p>
@@ -1162,7 +1193,6 @@ class SCDOpcodeHelper(QMainWindow):
         layout.addWidget(about_label)
 
         about_dialog.exec_()
-
 
     def show_error_message(self, title, message):
         """Displays an error message using the current theme."""
@@ -1336,8 +1366,10 @@ class SCDOpcodeHelper(QMainWindow):
                             description_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
 if __name__ == "__main__":
+    ensure_writable_json_files()
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("Blue.png"))  # Set the application icon
+    icon_path = resource_path("Blue.ico")
+    app.setWindowIcon(QIcon(icon_path))  # Set the application icon
     window = SCDOpcodeHelper()
     window.show()
     logging.info("Application started.")

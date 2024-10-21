@@ -1,33 +1,34 @@
+import os
+import sys
 import json
 
+def get_app_path(subdirectory=""):
+    """Get the application path, accounting for PyInstaller's temporary directory."""
+    if getattr(sys, 'frozen', False):
+        # Running as a bundled executable
+        base_path = os.path.dirname(sys.executable)
+    else:
+        # Running in a normal Python environment
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    if subdirectory:
+        return os.path.join(base_path, subdirectory)
+    return base_path
+
 def load_themes():
-    """Loads the themes from the themes.json file."""
-    try:
-        with open('themes.json', 'r') as file:
-            return json.load(file)
-    except json.JSONDecodeError as e:
-        print(f"Error loading themes: {e}")
-        return {}
-    except FileNotFoundError:
+    """Loads themes from the themes.json file."""
+    json_dir = get_app_path("json")
+    themes_path = os.path.join(json_dir, 'themes.json')
+    if not os.path.exists(themes_path):
         print("themes.json not found.")
         return {}
+    with open(themes_path, 'r') as file:
+        themes = json.load(file)
+    return themes
 
-def save_theme(theme_name, theme_style):
-    """Saves the given theme to the themes.json file."""
-    themes = load_themes()
-    themes[theme_name] = theme_style
-    with open('themes.json', 'w') as file:
-        json.dump(themes, file, indent=4)
-
-def dict_to_stylesheet(theme_dict):
-    """Converts a theme dictionary to a stylesheet string."""
-    if isinstance(theme_dict, str):
-        return theme_dict
+def dict_to_stylesheet(style_dict):
+    """Converts a dictionary of styles into a stylesheet string."""
     stylesheet = ""
-    for widget, properties in theme_dict.items():
-        widget_style = f"{widget} {{\n"
-        for property_name, value in properties.items():
-            widget_style += f"    {property_name}: {value};\n"
-        widget_style += "}\n"
-        stylesheet += widget_style
+    for widget, styles in style_dict.items():
+        styles_str = "; ".join(f"{k}: {v}" for k, v in styles.items())
+        stylesheet += f"{widget} {{ {styles_str} }}\n"
     return stylesheet

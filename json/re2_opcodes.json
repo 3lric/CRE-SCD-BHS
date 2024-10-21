@@ -17,14 +17,14 @@
     "Opcode Length": "02 Bytes",
     "Opcode Description": "This bytecode ends the current Main/Sub script.",
     "Bytes": {
-      "Opcode": {
-        "Type": "UCHAR",
-        "Description": "0x01"
-      },
-      "zAlign": {
-        "Type": "UCHAR",
-        "Description": "Always Zero (Alignment byte)"
-      }
+        "Opcode": {
+            "Type": "UCHAR",
+            "Description": "0x01"
+        },
+        "Nop": {
+            "Type": "UCHAR",
+            "Description": "Always Zero (Opcode for Nop)"
+        }
     }
   },
   "02": {
@@ -42,16 +42,24 @@
   "03": {
     "Opcode Name": "Evt_chain",
     "Opcode Number": "03",
-    "Opcode Length": "02 Bytes",
+    "Opcode Length": "04 Bytes",
     "Opcode Description": "This bytecode chains the current event to the specified next event ID, allowing the script to continue execution from the linked event.",
     "Bytes": {
       "Opcode": {
         "Type": "UCHAR",
         "Description": "0x03"
       },
-      "NextEventId": {
+      "Nop": {
         "Type": "UCHAR",
-        "Description": "Event ID to chain to"
+        "Description": "Always 0x00 (Opcode for Nop)"
+      },
+      "GoSub": {
+        "Type": "UCHAR",
+        "Description": "Always 0x18 (Opcode for Gosub)"
+      },
+      "Evt_no": {
+        "Type": "UCHAR",
+        "Description": "Event number (Numerical ID of SCD file)"
       }
     }
   },

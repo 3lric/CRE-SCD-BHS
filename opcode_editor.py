@@ -1,6 +1,7 @@
-# opcode_editor.py
+import sys
 import os
 import json
+import shutil  # Added for file operations
 from collections import OrderedDict
 from PyQt5.QtWidgets import (
     QDialog, QComboBox, QLineEdit, QTextEdit, QPushButton, QLabel, QTableWidget, QTableWidgetItem, QMessageBox,
@@ -9,7 +10,37 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QColor
 
+def get_app_path(subdirectory=""):
+    """Get the application path, accounting for PyInstaller's temporary directory."""
+    if getattr(sys, 'frozen', False):
+        # Running as a bundled executable
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    if subdirectory:
+        return os.path.join(base_path, subdirectory)
+    return base_path
+
+def ensure_writable_json_files():
+    """Ensure that JSON files are copied to a writable directory if running as a bundled executable."""
+    json_dir = get_app_path("json")
+    if not os.path.exists(json_dir):
+        os.makedirs(json_dir)
+    # List of JSON files
+    json_files = ["re1_opcodes.json", "re15_opcodes.json", "re2_opcodes.json", "re3_opcodes.json"]
+    for file_name in json_files:
+        dest_file = os.path.join(json_dir, file_name)
+        if not os.path.exists(dest_file):
+            if getattr(sys, 'frozen', False):
+                # Copy from the bundled resources
+                source_file = os.path.join(sys._MEIPASS, 'json', file_name)
+            else:
+                # Copy from the script directory
+                source_file = os.path.join(get_app_path("json"), file_name)
+            shutil.copyfile(source_file, dest_file)
+
 def open_opcode_editor(window):
+    ensure_writable_json_files()  # Ensure JSON files are available
     if not window.current_opcodes:
         print("No opcodes loaded.")
         return
@@ -53,6 +84,9 @@ def open_opcode_editor(window):
     for opcode_number, key_opcode_info_list in window.current_opcodes.items():
         for key, opcode_info in key_opcode_info_list:
             opcode_entries.append((key, opcode_number, opcode_info))
+
+    # Sort opcode entries by opcode number
+    opcode_entries.sort(key=lambda x: int(x[1], 16))
 
     # Populate the opcode dropdown
     for index, (key, opcode_number, opcode_info) in enumerate(opcode_entries):
@@ -262,10 +296,10 @@ def open_opcode_editor(window):
                 "Resident Evil 2": "re2_opcodes.json",
                 "Resident Evil 3": "re3_opcodes.json"
             }
-            file_path = game_file_map.get(game)
-            if file_path:
-                script_dir = os.path.dirname(os.path.abspath(__file__))
-                full_path = os.path.join(script_dir, file_path)
+            file_name = game_file_map.get(game)
+            if file_name:
+                json_dir = get_app_path("json")
+                full_path = os.path.join(json_dir, file_name)
                 try:
                     # Read the original file lines
                     with open(full_path, 'r', encoding='utf-8') as f:
@@ -283,7 +317,7 @@ def open_opcode_editor(window):
                             break
 
                     if start_index is None:
-                        raise Exception(f"Opcode {key} not found in {file_path}.")
+                        raise Exception(f"Opcode {key} not found in {file_name}.")
 
                     # Find the end of the opcode block
                     for i in range(start_index + 1, len(lines)):
@@ -293,7 +327,7 @@ def open_opcode_editor(window):
                             break
 
                     if end_index is None:
-                        raise Exception(f"Could not determine the end of opcode {key} in {file_path}.")
+                        raise Exception(f"Could not determine the end of opcode {key} in {file_name}.")
 
                     # Extract the opcode block
                     opcode_block_lines = lines[start_index:end_index + 1]
