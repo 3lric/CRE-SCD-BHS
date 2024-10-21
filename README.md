@@ -1,4 +1,4 @@
-# CRE SCD Editor Suite v0.6b
+# CRE SCD Editor Suite v0.7b
 
 The **CRE SCD Editor Suite** is a powerful tool designed to help modders edit SCD files for the classic Resident Evil series. This suite offers a comprehensive set of tools, including an opcode editor, theme customization, and support for multiple versions of Resident Evil SCD formats.
 
@@ -21,9 +21,9 @@ The **CRE SCD Editor Suite** is a powerful tool designed to help modders edit SC
 
 ### Running the Executable
 
-1. Download the latest release from the [releases page](https://github.com/3lric/CRE-SCD-BHS/releases/tag/v0.6b).
+1. Download the latest release from the [releases page](https://github.com/3lric/CRE-SCD-BHS/releases/tag/v0.7b).
 2. Extract the `.7z` file to your preferred directory.
-3. Run the `CRE SCD Build Helper Suite v0.6b.exe` file.
+3. Run the `CRE SCD Build Helper Suite v0.7.exe` file.
    
 ### Building from Source
 
