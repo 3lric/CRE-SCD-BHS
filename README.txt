@@ -1,5 +1,5 @@
 =====================================================
-           CRE SCD Editor Suite v0.6b by 3lric
+           CRE SCD Editor Suite v0.7b by 3lric
 =====================================================
 
 Thank you for downloading the CRE SCD Editor Suite! This program is a powerful tool designed for modding and editing SCD files from the classic Resident Evil games. 
